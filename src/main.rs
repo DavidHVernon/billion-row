@@ -15,13 +15,13 @@ fn main() {
 }
 
 fn billion_row_challenge() -> Result<(), Error> {
-    println!("Begin");
-
-    let path = Path::new("weather_stations.csv");
+    // Open the data file
+    let path = Path::new("../billion-row-data/measurements-1000000000.txt");
     let mut file = File::open(&path)?;
     let mut buf = vec![];
     let _ = file.read_to_end(&mut buf)?;
 
+    // Call scan_data.
     let hash_tab = HashMap::new();
     match scan_data(&mut buf, hash_tab) {
         Ok(hash_tab) => {
@@ -36,7 +36,6 @@ fn billion_row_challenge() -> Result<(), Error> {
             println!("Error: {}", error);
         }
     }
-
     Ok(())
 }
 
